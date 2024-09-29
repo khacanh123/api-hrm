@@ -1,0 +1,73 @@
+[
+    {
+      "tenSanPham": "Laptop Asus X515EA",
+      "giaGoc": 15000000,
+      "giaKhuyenMai": 13500000,
+      "soLuong": 25,
+      "moTa": "Laptop mỏng nhẹ, hiệu năng mạnh mẽ với chip Intel Core i5."
+    },
+    {
+      "tenSanPham": "iPhone 14 Pro Max",
+      "giaGoc": 35000000,
+      "giaKhuyenMai": 32000000,
+      "soLuong": 50,
+      "moTa": "Smartphone cao cấp với màn hình Super Retina XDR 6.7 inch."
+    },
+    {
+      "tenSanPham": "Tai nghe Bluetooth Sony WF-1000XM4",
+      "giaGoc": 5500000,
+      "giaKhuyenMai": 4800000,
+      "soLuong": 100,
+      "moTa": "Tai nghe không dây chống ồn hàng đầu với âm thanh chất lượng cao."
+    },
+    {
+      "tenSanPham": "Máy giặt LG Inverter 9kg",
+      "giaGoc": 8000000,
+      "giaKhuyenMai": 7200000,
+      "soLuong": 10,
+      "moTa": "Máy giặt Inverter tiết kiệm điện, lồng ngang với công nghệ giặt nhanh."
+    },
+    {
+      "tenSanPham": "Tivi Samsung 4K 50 inch",
+      "giaGoc": 12000000,
+      "giaKhuyenMai": 10500000,
+      "soLuong": 30,
+      "moTa": "Tivi 4K với màn hình sắc nét, công nghệ HDR10+ cho hình ảnh sống động."
+    },
+    {
+      "tenSanPham": "Bàn phím cơ Logitech G Pro",
+      "giaGoc": 2500000,
+      "giaKhuyenMai": 2200000,
+      "soLuong": 80,
+      "moTa": "Bàn phím cơ chuyên nghiệp dành cho game thủ với switch GX Blue."
+    },
+    {
+      "tenSanPham": "Đồng hồ thông minh Garmin Forerunner 255",
+      "giaGoc": 7000000,
+      "giaKhuyenMai": 6300000,
+      "soLuong": 15,
+      "moTa": "Đồng hồ thể thao GPS với cảm biến đo nhịp tim, hỗ trợ luyện tập chuyên nghiệp."
+    },
+    {
+      "tenSanPham": "Máy lọc không khí Xiaomi Mi Air Purifier 3H",
+      "giaGoc": 3500000,
+      "giaKhuyenMai": 3000000,
+      "soLuong": 40,
+      "moTa": "Máy lọc không khí thông minh, lọc 99.97% bụi mịn PM 2.5."
+    },
+    {
+      "tenSanPham": "Bếp từ đôi Kangaroo KG499i",
+      "giaGoc": 4000000,
+      "giaKhuyenMai": 3500000,
+      "soLuong": 20,
+      "moTa": "Bếp từ đôi thông minh, tiết kiệm điện với công nghệ Inverter."
+    },
+    {
+      "tenSanPham": "Ghế văn phòng Ergonomic Sihoo",
+      "giaGoc": 6000000,
+      "giaKhuyenMai": 5400000,
+      "soLuong": 35,
+      "moTa": "Ghế văn phòng cao cấp với thiết kế công thái học, hỗ trợ cột sống."
+    }
+  ]
+  

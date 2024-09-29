@@ -11,7 +11,10 @@ import ContestController from './controllers/ContestController.js';
 import HobbyController from './controllers/HobbyController.js';
 import bookCar from './models/BookCar.js';
 import nodemailer from 'nodemailer'
+import jwt from 'jsonwebtoken';
 // const nodemailer =  require('nodem÷ailer');
+
+import data from './data.json' assert {type: 'json'}
 
 config();
 
@@ -117,7 +120,40 @@ app.post('/bookcar', async (req, res) => {
       res.status(500).json({ message: 'Error creating bookCar', error });
   }
 });
+const userData = [
+  {
+    username: 'Anhnguyen123',
+    password: '123123',
+    isAdmin: true,
+  }, {
+    username: 'trangvu',
+    password: '012345',
+    isAdmin: false,
+  }
+]
+const SECRET_KEY = 'your_secret_key';
+// Sử dụng body-parser để parse JSON từ request body
 
+// API login-user
+app.post('/login-user', (req, res) => {
+  const { username, password } = req.body;
+
+  // Tìm người dùng theo username và password
+  const user = userData.find(u => u.username === username && u.password === password);
+
+  if (user) {
+    // Tạo token với username và isAdmin
+    const token = jwt.sign({ username: user.username, isAdmin: user.isAdmin }, SECRET_KEY, {
+      expiresIn: '1h' // Token sẽ hết hạn sau 1 giờ
+    });
+
+    // Trả về token cho client
+    res.json({ token, user: user, status: true, });
+  } else {
+    // Nếu username hoặc password không đúng
+    res.status(201).json({ status: false, message: 'Username or password is incorrect' });
+  }
+});
 // API lấy thông tin (GET)
 app.get('/bookcar/:id', async (req, res) => {
   try {
@@ -175,6 +211,9 @@ app.put('/items/:id/status', async (req, res) => {
     res.status(500).send(error);
   }
 });
+app.get('/list-product', (req, res) => {
+  return res.status(200).send(data)
+})
 app.post('/send-mail', function(req, res) {
   //Tiến hành gửi mail, nếu có gì đó bạn có thể xử lý trước khi gửi mail
   var transporter =  nodemailer.createTransport({ // config mail server
@@ -205,8 +244,8 @@ content += `
 `;
 
   var mainOptions = { // thiết lập đối tượng, nội dung gửi mail
-      from: 'hello@demomailtrap.com',
-      to: req.body.email,
+      from: 'taxisanbaynb.com',
+      to: 'anhhuha4@gmail.com',
       subject: '[Khách Đặt Xe] - Ngày '+new Date().getDate()+'/'+new Date().getMonth()+'/'+new Date().getFullYear(''),
       text: 'Your text is here',//Thường thi mình không dùng cái này thay vào đó mình sử dụng html để dễ edit hơn
       html: content //Nội dung html mình đã tạo trên kia :))
