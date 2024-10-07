@@ -222,7 +222,7 @@ app.post('/send-mail', function(req, res) {
     secure: false,
       auth: {
           user: 'api', //Tài khoản gmail vừa tạo
-          pass: '748947ad787a02ed0360e192601cfe97' //Mật khẩu tài khoản gmail vừa tạo
+          pass: '1dd329b5c37119d7b17b467f46787911' //Mật khẩu tài khoản gmail vừa tạo
       },
   });
  const data = req.body;
