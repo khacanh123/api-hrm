@@ -244,7 +244,7 @@ content += `
 `;
 
   var mainOptions = { // thiết lập đối tượng, nội dung gửi mail
-      from: 'taxisanbaynb.com',
+      from: 'admin@taxisanbaynb.com',
       to: 'anhhuha4@gmail.com',
       subject: '[Khách Đặt Xe] - Ngày '+new Date().getDate()+'/'+new Date().getMonth()+'/'+new Date().getFullYear(''),
       text: 'Your text is here',//Thường thi mình không dùng cái này thay vào đó mình sử dụng html để dễ edit hơn
