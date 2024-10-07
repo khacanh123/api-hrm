@@ -122,8 +122,8 @@ app.post('/bookcar', async (req, res) => {
 });
 const userData = [
   {
-    username: 'Anhnguyen123',
-    password: '123123',
+    username: '0987456654',
+    password: 'Pass@1234',
     isAdmin: true,
   }, {
     username: 'trangvu',
@@ -211,8 +211,8 @@ app.put('/items/:id/status', async (req, res) => {
     res.status(500).send(error);
   }
 });
-app.get('/list-product', (req, res) => {
-  return res.status(200).send(data)
+app.get('/list-product', async(req, res) => {
+  res.status(200).send(data)
 })
 app.post('/send-mail', function(req, res) {
   //Tiến hành gửi mail, nếu có gì đó bạn có thể xử lý trước khi gửi mail
@@ -222,7 +222,7 @@ app.post('/send-mail', function(req, res) {
     secure: false,
       auth: {
           user: 'api', //Tài khoản gmail vừa tạo
-          pass: '748947ad787a02ed0360e192601cfe97' //Mật khẩu tài khoản gmail vừa tạo
+          pass: '1dd329b5c37119d7b17b467f46787911' //Mật khẩu tài khoản gmail vừa tạo
       },
   });
  const data = req.body;
@@ -244,7 +244,7 @@ content += `
 `;
 
   var mainOptions = { // thiết lập đối tượng, nội dung gửi mail
-      from: 'taxisanbaynb.com',
+      from: 'admin@taxisanbaynb.com',
       to: 'anhhuha4@gmail.com',
       subject: '[Khách Đặt Xe] - Ngày '+new Date().getDate()+'/'+new Date().getMonth()+'/'+new Date().getFullYear(''),
       text: 'Your text is here',//Thường thi mình không dùng cái này thay vào đó mình sử dụng html để dễ edit hơn
