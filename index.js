@@ -13,7 +13,7 @@ import bookCar from './models/BookCar.js';
 import nodemailer from 'nodemailer'
 import jwt from 'jsonwebtoken';
 // const nodemailer =  require('nodem÷ailer');
-
+import puppeteer from 'puppeteer';
 import data from './data.json' assert {type: 'json'}
 
 config();
@@ -94,6 +94,13 @@ const api_key = 'AK_CS.7fd8c230774711ef80bb3d5e2ce05983.KQI6QB6yum2sKgScFcbJEmgm
 app.get('/transaction-status/:id', async (req, res) => {
   const d = new Date();
   const currentDay = d.getFullYear()+'-0'+(d.getMonth()+1)+'-'+d.getDate()
+  const syncData = fetch('https://oauth.casso.vn/v2/sync'  , {
+    method: "POST",
+    headers: {
+      "Authorization": `Apikey ${api_key}`
+    },
+    body: JSON.stringify({bank_acc_id: 19039508297011})
+});
   const listQuestion = await fetch('https://oauth.casso.vn/v2/transactions?fromDate='+currentDay+'&toDate='+currentDay, {
             method: "GET",
             headers: {
@@ -268,7 +275,35 @@ content += `
       }
   });
 });
+app.get('/sync-data', async(req, res) => {
+  const browser = await puppeteer.launch({ headless: true });
+  const page = await browser.newPage();
 
+  // Điều hướng đến trang web FPT Shop
+  await page.goto('https://fptshop.com.vn/dien-thoai');
+
+  // Đợi trang tải xong và lấy dữ liệu sản phẩm
+  const products = await page.evaluate(() => {
+    // Chọn tất cả các sản phẩm
+    const productElements = document.querySelectorAll('.ProductCard_cardDefault__km9c5');
+
+    // Trích xuất tên sản phẩm và giá
+    const productData = [];
+    productElements.forEach((product) => {
+      const image = product.querySelector('.bg-no-repeat div img').getAttribute('src');
+      const name = product.querySelector('.ProductCard_cardTitle__HlwIo a').innerText;
+      productData.push({ name, image });
+    });
+
+    return productData;
+  });
+
+  // In ra dữ liệu sản phẩm
+  console.log(products);
+
+  // Đóng trình duyệt
+  await browser.close();
+})
     server.listen(PORT, () => {
       console.log('Dinter running on port ' + PORT);
     })

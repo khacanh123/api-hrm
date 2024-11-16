@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 import { authMiddleware } from '../middleware/authMiddleware.js';
 import multer from 'multer';
-import { VideoController } from '../controllers/index.js';
+// import { VideoController } from '../controllers/index.js';
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'public/videos/')
@@ -19,11 +19,11 @@ const upload = multer({
 })
 
 
-router.post('/', authMiddleware, upload.single("video"), VideoController.uploadStory)
-    .delete('/:storyId', authMiddleware, VideoController.deleteStory)
-    .get('/', authMiddleware, VideoController.getStory)
-    .post('/like', authMiddleware, VideoController.likeVideo)
-    .post('/video', authMiddleware, VideoController.viewVideo)
-    .get('/viewed/:id', authMiddleware, VideoController.getViewer)
-    .get('/all-from/:userId', VideoController.getAllStoryOfUser)
+// router.post('/', authMiddleware, upload.single("video"), VideoController.uploadStory)
+    // .delete('/:storyId', authMiddleware, VideoController.deleteStory)
+    // .get('/', authMiddleware, VideoController.getStory)
+    // .post('/like', authMiddleware, VideoController.likeVideo)
+    // .post('/video', authMiddleware, VideoController.viewVideo)
+    // .get('/viewed/:id', authMiddleware, VideoController.getViewer)
+    // .get('/all-from/:userId', VideoController.getAllStoryOfUser)
 export default router

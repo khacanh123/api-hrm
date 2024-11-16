@@ -47,140 +47,55 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
     <div id="app">
-        <h3 style="text-align: center;">Quản trị web</h3>
-        <ul class="nav nav-tabs" style="margin-top: 10px;">
-            <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#home">Thông tin cơ bản</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#menu1">Đặt xe nổi bật</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#menu2">Đặt xe đi tỉnh</a>
-            </li>
-          </ul>
-        
-          <!-- Tab panes -->
-          <div class="tab-content">
-            <div id="home" class="container tab-pane active"><br>
-              <div class="row">
-                <div class="col-sm-12 col-lg-6 col-md-6">
-                    <div class="form-group">
-                        <label >Text logo:</label>
-                        <input type="text" class="form-control" :value="bookcar.textLogo" @change="(e) => handleSelectChange(e, index, 'textLogo')">
-                      </div>
-                </div>
-                <div class="col-sm-12 col-lg-6 col-md-6">
-                    <div class="form-group">
-                        <label >SĐT:</label>
-                        <input type="text" class="form-control" :value="bookcar.telephone" @change="(e) => handleSelectChange(e, index, 'telephone')">
-                      </div>
-                </div>
-                <div class="col-sm-12 col-lg-6 col-md-6">
-                    <div class="form-group">
-                        <label >Email QTV:</label>
-                        <input type="text" class="form-control" :value="bookcar.email" @change="(e) => handleSelectChange(e, index, 'email')">
-                      </div>
-                </div>
-                <div class="col-sm-12 col-lg-6 col-md-6">
-                    <div class="form-group">
-                        <label >Website:</label>
-                        <input type="text" class="form-control" :value="" disabled >
-                      </div>
-                </div>
-              </div>
-              <div style="display: flex; justify-content: center;">
-            <button class="btn btn-primary" @click="updateDataAPI(0)">Cập nhật</button>
+        <div>
+            <h3 style="text-align: center;">Danh sách yêu cầu thanh toán</h3>
+            <div class="flex-end">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"
+                @click="createTransaction()"
+                >
+                    Thêm mới yêu cầu
+                </button>
             </div>
-              </div>
-            <div id="menu1" class="container tab-pane fade"><br>
-                <table class="bao-gia" style="width: 100%;" v-show="!isShow">
-                    <tr>
-                      <th>Điểm đi</th>
-                      <th>Điểm đến</th>
-                      <th>Giá</th>
-                      <th>#</th>
-                    </tr>
-                    <tr v-for="(value ,i) in bookcar.carHot">
-                      <td class="text-css">{{value?.start}}</td>
-                      <td class="text-css">{{value?.end}}</td>
-                      <td class="text-css">{{Number(value?.price).toLocaleString('vi-VN')}} đ</td>
-                      <td @click="editFunction(i, bookcar.carHot)">Sửa</td>
-                    </tr>
-                    
-                  </table>
-                  <div v-show="isShow">
-                    <div class="row">
-                        <div class="col-sm-12 col-lg-6 col-md-6">
-                            <div class="form-group">
-                                <label >Điểm đi:</label>
-                                <input type="text" :value="choice[index]?.start" @change="(e) => handleSelectChange(e, index, 'start')" class="form-control">
-                              </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-6 col-md-6">
-                            <div class="form-group">
-                                <label >Điểm đến:</label>
-                                <input type="text" :value="choice[index]?.end" class="form-control" @change="(e) => handleSelectChange(e, index, 'end')">
-                              </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-6 col-md-6">
-                            <div class="form-group">
-                                <label >Giá:</label>
-                                <input type="text" :value="choice[index]?.price" class="form-control" @change="(e) => handleSelectChange(e, index, 'price')">
-                              </div>
-                        </div>
-                    </div>
-                    <div style="display: flex; justify-content: center; gap: 8px;">
-                        <button class="btn btn-danger" @click="isShow = false">Huỷ</button>
-                        <button class="btn btn-primary" @click="updateDataAPI(1)">Cập nhật</button>
-                        </div>
-                  </div>
-            </div>
-            <div id="menu2" class="container tab-pane fade"><br>
-                <table class="bao-gia" style="width: 100%;" v-show="!isShow">
-                    <tr>
-                      <th>Điểm đi</th>
-                      <th>Điểm đến</th>
-                      <th>Giá</th>
-                      <th>#</th>
-                    </tr>
-                    <tr v-for="(value ,i) in bookcar.listbookCar">
-                      <td class="text-css">{{value?.start}}</td>
-                      <td class="text-css">{{value?.end}}</td>
-                      <td class="text-css">{{Number(value?.price).toLocaleString('vi-VN')}} đ</td>
-                      <td @click="editFunction(i, bookcar.listbookCar)">Sửa</td>
-                    </tr>
-                    
-                  </table>
-                  <div v-show="isShow">
-                    <div class="row">
-                        <div class="col-sm-12 col-lg-6 col-md-6">
-                            <div class="form-group">
-                                <label >Điểm đi:</label>
-                                <input type="text" :value="choice[index]?.start" @change="(e) => handleSelectChange(e, index, 'start')" class="form-control">
-                              </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-6 col-md-6">
-                            <div class="form-group">
-                                <label >Điểm đến:</label>
-                                <input type="text" :value="choice[index]?.end" class="form-control" @change="(e) => handleSelectChange(e, index, 'end')">
-                              </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-6 col-md-6">
-                            <div class="form-group">
-                                <label >Giá:</label>
-                                <input type="text" :value="choice[index]?.price" class="form-control" @change="(e) => handleSelectChange(e, index, 'price')">
-                              </div>
-                        </div>
-                    </div>
-                    <div style="display: flex; justify-content: center; gap: 8px;">
-                        <button class="btn btn-danger" @click="isShow = false">Huỷ</button>
-                        <button class="btn btn-primary" @click="updateDataAPI(2)">Cập nhật</button>
-                        </div>
-                  </div>  
-            </div>
-          </div>
-        
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã giao dịch</th>
+                    <th>Tên giao dịch</th>
+                    <th>Số tiền thanh toán</th>
+                    <th>Ngân hàng</th>
+                    <th>Số tài khoản</th>
+                    <th>Trạng thái</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(d, index) in data" :key="d._id">
+                    <td>{{index+1}}</td>
+                    <td>{{d.code}}</td>
+                    <td>{{d.name}}</td>
+                    <td>{{d.total_money}}</td>
+                    <td>{{d.bank_name}}</td>
+                    <td>{{d.bank_number}}</td>
+                    <td>
+                        <p v-if="d.status == 0"
+                            style="padding: 2px; border-radius: 4px; color: white; background-color: rgb(255, 203, 0); text-align: center;">
+                            Chờ duyệt</p>
+                        <p v-else-if="d.status == 1"
+                            style="padding: 2px; border-radius: 4px; color: white; background-color: rgb(223, 47, 74); text-align: center;">
+                            Từ chối</p>
+                        <p v-else
+                            style="padding: 2px; border-radius: 4px; color: white; background-color: green; text-align: center;">
+                            Đã thanh toán</p>
+                    </td>
+                    <td style="display: flex; gap: 4px; align-items: center;">
+                        <p style="cursor: pointer; color: green;"  data-toggle="modal" data-target="#editmodal" @click="handleEdit(d)">Update</p>
+                        <p style="cursor: pointer; color: red">Delete</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
        
         <div class="modal" id="myModal">
             <div class="modal-dialog">
@@ -413,7 +328,7 @@ async function updateDataAPI(type) {
                         }
                         isLoading.value = false;
                         const run = setInterval(async()=> {
-                            const response = await fetch('http://localhost:3008/transaction-status/'+name, {
+                            const response = await fetch(domain_api +'/transaction-status/'+name, {
                             method: 'GET',
                         });
                         const data_a = await response.json();
