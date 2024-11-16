@@ -94,15 +94,14 @@ const api_key = 'AK_CS.7fd8c230774711ef80bb3d5e2ce05983.KQI6QB6yum2sKgScFcbJEmgm
 app.get('/transaction-status/:id', async (req, res) => {
   const d = new Date();
   const currentDay = d.getFullYear()+'-0'+(d.getMonth()+1)+'-'+d.getDate()
-
-  const listQuestion = await fetch('https://oauth.casso.vn/v2/transactions?fromDate='+currentDay+'&toDate='+currentDay, {
+const listQuestion = await fetch('https://oauth.casso.vn/v2/transactions?fromDate='+currentDay+'&toDate='+currentDay, {
             method: "GET",
             headers: {
               "Authorization": `Apikey ${api_key}`
             }
         });
         const response = await listQuestion.json();
-        const records = response.data.records;
+        const records = response.data == null ? [] : response.data.records;
         const filterID = records.filter((item) => item.description.includes(req.params.id.toString()));
         res.status(200).json({
           status: filterID.length > 0 ? true : false,
