@@ -15,7 +15,8 @@ import jwt from 'jsonwebtoken';
 // const nodemailer =  require('nodem÷ailer');
 import puppeteer from 'puppeteer';
 import data from './data.json' assert {type: 'json'}
-
+import PayOS from "@payos/node";
+import QRCode from 'qrcode-svg';
 config();
 
 
@@ -29,6 +30,7 @@ const app = express();
 app.use('/public',express.static('public'));
 const PORT = process.env.PORT || 3007;
 
+const payos = new PayOS("4898d756-c74c-474a-a130-7a77ab262bf4", "be42b54b-b79f-491f-8071-85e1ab7978c7", "4d282c87b7b6a0bbb23d8c67f1e5fb34d3c83ca9c505ecbab307fbe7421ad0b8");
 const server = http.Server(app);
 const peerServer = ExpressPeerServer(server, {
   debug: true,
@@ -124,6 +126,49 @@ res.status(200).json({
     imgQr: response.data.qrDataURL
   }
 })
+})
+function generateQRCodeSVG(text) {
+  const qrCode = new QRCode({
+    content: text,
+    padding: 4,
+    width: 256,
+    height: 256,
+    color: "#000000",
+    background: "#ffffff",
+    ecl: "M", // Error correction level
+  });
+  return qrCode.svg();
+}
+function convertTextToUrl(text) {
+  const encodedText = encodeURIComponent(text);
+  return `https://quickchart.io/qr?text=${encodedText}&size=200`;
+}
+app.post('/create-payment', async(req,res) => {
+  const requestData = {
+    orderCode: 111205,
+    amount: 1000,
+    description: "Thanh toan don hang",
+    items: [
+      {
+        name: "Mì tôm hảo hảo ly",
+        quantity: 1,
+        price: 1000,
+      }
+    ],
+    cancelUrl: "https://your-domain.com",
+    returnUrl: "https://your-domain.com",
+};
+const paymentLinkData = await payos.createPaymentLink(requestData);
+const qrImg = generateQRCodeSVG(paymentLinkData.qrCode);
+
+res.send({
+  data: paymentLinkData,
+  imgQr: convertTextToUrl(paymentLinkData.qrCode)
+})
+})
+app.get('/get-status-order/:id', async(req, res) => {
+  const response = await payos.getPaymentLinkInformation(req.params.id);
+  res.send(response)
 })
 // bookcar
 // API tạo mới (CREATE)

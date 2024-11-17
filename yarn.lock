@@ -66,6 +66,14 @@
   dependencies:
     sparse-bitfield "^3.0.3"
 
+"@payos/node@^1.0.10":
+  version "1.0.10"
+  resolved "https://registry.npmjs.org/@payos/node/-/node-1.0.10.tgz"
+  integrity sha512-dY+WHd6pLa558a1G8yv6oKfVe5QLTNyYnQBaSQtwvMAm/p0faKAnfXt04LNIwO9/4buas4ES+sDxc1bfX/mVbQ==
+  dependencies:
+    axios "^1.5.0"
+    crypto "^1.0.1"
+
 "@puppeteer/browsers@2.4.0":
   version "2.4.0"
   resolved "https://registry.npmjs.org/@puppeteer/browsers/-/browsers-2.4.0.tgz"
@@ -396,7 +404,7 @@ aws4@^1.8.0:
   resolved "https://registry.npmjs.org/aws4/-/aws4-1.13.0.tgz"
   integrity sha512-3AungXC4I8kKsS9PuS4JH2nc+0bVY/mjgrephHTIi8fpEeGsTHBUJeosp0Wc1myYMElmD0B3Oc4XL/HVJ4PV2g==
 
-axios@^1.7.3, axios@>=0.27:
+axios@^1.5.0, axios@^1.7.3, axios@>=0.27:
   version "1.7.3"
   resolved "https://registry.npmjs.org/axios/-/axios-1.7.3.tgz"
   integrity sha512-Ar7ND9pU99eJ9GpoGQKhKf58GpUOgnzuaB7ueNQ5BMi0p+LZ5oaEnfF999fAArcTIBwXTCHAmGcHOZJaWPq9Nw==
@@ -764,6 +772,11 @@ cross-spawn@^7.0.3:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
+
+crypto@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/crypto/-/crypto-1.0.1.tgz"
+  integrity sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig==
 
 dashdash@^1.12.0:
   version "1.14.1"
@@ -2589,6 +2602,11 @@ puppeteer@^23.6.0:
     devtools-protocol "0.0.1354347"
     puppeteer-core "23.6.0"
     typed-query-selector "^2.12.0"
+
+qrcode-svg@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/qrcode-svg/-/qrcode-svg-1.1.0.tgz"
+  integrity sha512-XyQCIXux1zEIA3NPb0AeR8UMYvXZzWEhgdBgBjH9gO7M48H9uoHzviNz8pXw3UzrAcxRRRn9gxHewAVK7bn9qw==
 
 qs@~6.5.2:
   version "6.5.3"
